@@ -1,7 +1,11 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 function Login() {
   const handleSubmit = async (event) => {};
+
+  const location = useLocation();
+  const message = location.state || {}; // Fallback to empty object if no data
 
   return (
     <div>
@@ -18,6 +22,7 @@ function Login() {
       <button type="submit" onClick={handleSubmit}>
         Login
       </button>
+      {message}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { NavLink } from "react-router";
-import napoleon from "../Assets/Bilder/napoleon.webp"
+import napoleon from "../Assets/Bilder/napoleon.webp";
 
 function SignUp(props) {
   const [email, setEmail] = useState();
@@ -21,9 +21,7 @@ function SignUp(props) {
 
     try {
       const response = await api.post("/api/account/register", newUser);
-      console.log(response.data.message);
-      setErrorMessage("");
-      navigate("/login");
+      navigate("/login", { state: response.data.message });
     } catch (error) {
       console.log(error);
       setErrorMessage(error.response.data);
@@ -33,9 +31,7 @@ function SignUp(props) {
   return (
     <div className="App">
       <h1>Registrieren</h1>
-
-      <img src={napoleon} alt="Napoleon" id="napoleon"/>
-      
+      <img src={napoleon} alt="Napoleon" id="napoleon" />
       <form>
         <br />
         <label>Email: </label>
@@ -68,27 +64,18 @@ function SignUp(props) {
         <br /> <br />
         <p style={{ color: "red" }}>{errorMessage}</p>
       </form>
-
       <h2>Schon registriert?</h2>
-
       <br />
-
       <NavLink to="/login">
         <h2>Melde dich an</h2>
       </NavLink>
-
       <br /> <br />
-
       <h2>Vorteile beim Registrieren:</h2>
-    
       • Kontaktiere den Schöpfer (mich) <br />
       • Bewerte und kommentiere die Gemälder
-
       <br /> <br />
-      
     </div>
   );
 }
 
 export default SignUp;
-
